@@ -1,11 +1,21 @@
 const puppeteer = require("puppeteer");
 //const fs = require("fs/promises");
+require("dotenv").config();
 const keyWord = "";
 const scrapeLogic = async (res) => {
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: null,
-    executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    args: [
+      "--disable-setuid-sandbox",
+      "--no-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
   }); // Launch a new browser instance
   try {
     const page = await browser.newPage();
