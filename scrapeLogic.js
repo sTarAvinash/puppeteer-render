@@ -4,7 +4,7 @@ require("dotenv").config();
 const keyWord = "";
 const scrapeLogic = async (res) => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: "new",
     defaultViewport: null,
     args: [
       "--disable-setuid-sandbox",
